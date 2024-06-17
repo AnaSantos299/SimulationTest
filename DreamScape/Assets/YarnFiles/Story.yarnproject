@@ -8,7 +8,7 @@
   ],
   "localisation": {
     "en": {
-      "assets": "Audio_EN"
+      "assets": "../Audio_EN"
     }
   },
   "baseLanguage": "en",
