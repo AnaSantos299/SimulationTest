@@ -1,8 +1,16 @@
 ﻿title: Scene2Start
 tags:
 ---
+<<makePhoneInvisible GameManager>>
+: "Ah...What are all this messages? #line:line_1 
+<<makePhoneVisible GameManager>>
+Your Inner Voice: What is happening? #line:line_2 
+===
 
-You: "Ah...What are all this messages?
 
-You: What is happening?
+title: SayHelloNode
+position: -46,-652
+---
+Oh não! Não vamos conseguir salvar o planeta! Tenta outra vez... #line:line_3 
+<<jump Scene2Start>>
 ===
