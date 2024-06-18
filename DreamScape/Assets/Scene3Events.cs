@@ -26,7 +26,8 @@ public class Scene3Events : MonoBehaviour
     }
 
     //----------------------------------VERIFICATION----------------------------------------
-    [YarnCommand("checkObjectIconsCount")]
+
+    /*[YarnCommand("checkObjectIconsCount")]
     public void CheckObjectIconsCount()
     {
         //if the objectcount is >= 3, it will call the dialogue from the Scene3_EN.yarn and start the transition to the next scene.
@@ -36,9 +37,9 @@ public class Scene3Events : MonoBehaviour
             //stop the dialogue running
             dialogueRunner.Stop();
             //Start new dialogue
-            dialogueRunner.StartDialogue("transition_Scene4");
+            dialogueRunner.StartDialogue("transitionStart");
         }
-    }
+    }*/
 
     //----------------------------------ACTIONS FROM CLICKS----------------------------------------
     public void TableObject()
@@ -52,6 +53,16 @@ public class Scene3Events : MonoBehaviour
         //add one to the object Count
         objectCount++;
         Debug.Log(objectCount);
+
+        //if the objectcount is >= 3, it will call the dialogue from the Scene3_EN.yarn and start the transition to the next scene.
+        if (objectCount >= 3)
+        {
+            Debug.Log("OBJECT COUNT IS 3");
+            //stop the dialogue running
+            dialogueRunner.Stop();
+            //Start new dialogue
+            dialogueRunner.StartDialogue("transitionStart");
+        }
     }
 
     public void CabinetObject()
@@ -65,6 +76,16 @@ public class Scene3Events : MonoBehaviour
         //add one to the object count
         objectCount++;
         Debug.Log(objectCount);
+
+        //if the objectcount is >= 3, it will call the dialogue from the Scene3_EN.yarn and start the transition to the next scene.
+        if (objectCount >= 3)
+        {
+            Debug.Log("OBJECT COUNT IS 3");
+            //stop the dialogue running
+            dialogueRunner.Stop();
+            //Start new dialogue
+            dialogueRunner.StartDialogue("transitionStart");
+        }
     }
 
     public void BedObject()
@@ -78,6 +99,16 @@ public class Scene3Events : MonoBehaviour
         //add one to the object count
         objectCount++;
         Debug.Log(objectCount);
+
+        //if the objectcount is >= 3, it will call the dialogue from the Scene3_EN.yarn and start the transition to the next scene.
+        if (objectCount >= 3)
+        {
+            Debug.Log("OBJECT COUNT IS 3");
+            //stop the dialogue running
+            dialogueRunner.Stop();
+            //Start new dialogue
+            dialogueRunner.StartDialogue("transitionStart");
+        }
     }
 
     //----------------------------------COROUTINES----------------------------------------

@@ -26,20 +26,15 @@ tags:
 <<checkObjectIconsCount GameManager>>
 ===
 
-title: transition_Scene4
+title: transitionStart
 tags:
 ---
-fgdftftf: Ah, so many things, what am I doing with my life...
-<<jump teste>>
-===
-
-title: teste
-tags:
----
-fgdftftf: Ah, so many things, what am I doing with my life...
-: I am really tired, i should go to sleep and think about all this expenses in the morning.
+: ...another expense that maybe wasnt necessary...
+: Ah, so many things, what am I doing with my life...
+: I am really tired...i need to go to sleep, i will do something about this tomorrow.
 <<transition_Scene4Images GameManager>>
 ===
+
 
 
 
