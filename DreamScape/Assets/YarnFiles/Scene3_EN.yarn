@@ -4,3 +4,42 @@ tags:
 : Where did I spend all my money? #line:line_7
 : Let me look around the room and see if I can find out something... #line:line_8
 ===
+
+title: tableObject
+tags:
+---
+: A receipt? 169€ in snacks? I should really start considering my decisions... #line:line_9
+<<checkObjectIconsCount GameManager>>
+===
+
+title: bedObject
+tags:
+---
+: I bought this shoes for 79€, were they really needed? #line:line10
+<<checkObjectIconsCount GameManager>>
+===
+
+title: cabinetObject
+tags:
+---
+: I havent use this wii for such a long time, was it really a necessary purchase? #line:line11
+<<checkObjectIconsCount GameManager>>
+===
+
+title: transition_Scene4
+tags:
+---
+fgdftftf: Ah, so many things, what am I doing with my life...
+<<jump teste>>
+===
+
+title: teste
+tags:
+---
+fgdftftf: Ah, so many things, what am I doing with my life...
+: I am really tired, i should go to sleep and think about all this expenses in the morning.
+<<transition_Scene4Images GameManager>>
+===
+
+
+
