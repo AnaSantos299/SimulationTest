@@ -21,7 +21,7 @@ public class Scene3Events : MonoBehaviour
     [YarnCommand("transition_Scene4Images")]
     public void Transition_Scene4Images()
     {
-        //coroutine for the transaction from Scene3 to Scene4
+        //coroutine for the transaction from Scene3 to Scene4.
         StartCoroutine(DisplayImagesForTransition());
     }
 
