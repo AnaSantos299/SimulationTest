@@ -25,22 +25,6 @@ public class Scene3Events : MonoBehaviour
         StartCoroutine(DisplayImagesForTransition());
     }
 
-    //----------------------------------VERIFICATION----------------------------------------
-
-    /*[YarnCommand("checkObjectIconsCount")]
-    public void CheckObjectIconsCount()
-    {
-        //if the objectcount is >= 3, it will call the dialogue from the Scene3_EN.yarn and start the transition to the next scene.
-        if (objectCount >= 3)
-        {
-            Debug.Log("OBJECT COUNT IS 3");
-            //stop the dialogue running
-            dialogueRunner.Stop();
-            //Start new dialogue
-            dialogueRunner.StartDialogue("transitionStart");
-        }
-    }*/
-
     //----------------------------------ACTIONS FROM CLICKS----------------------------------------
     public void TableObject()
     {

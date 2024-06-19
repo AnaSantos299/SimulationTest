@@ -1,0 +1,23 @@
+﻿title: Scene4_EN
+tags:
+---
+: Oh...What is this? #line:09d3eee 
+: Hang on...Am I still sleeping? A puzzle?? #line:0ec375f 
+: It reminds me of the ones i use to solve when I was little... #line:06bcb62 
+: Let me try to solve it. #line:0d298c6 
+===
+
+title: firstPuzzleSub
+tags:
+---
+: Essential or non-essential? What is this? #line:0b8162e 
+: Oh...I must decide if the image on the puzzle is something essential for me or not. #line:0da88c6 
+===
+
+title: Scene5Transaction
+tags:
+---
+: All this puzzles...are they gonna end?
+: I am seing something, what is happening?
+<<changeToScene5 GameManager>>
+===

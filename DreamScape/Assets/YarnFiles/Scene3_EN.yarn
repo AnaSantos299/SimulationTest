@@ -29,9 +29,9 @@ tags:
 title: transitionStart
 tags:
 ---
-: ...another expense that maybe wasnt necessary...
-: Ah, so many things, what am I doing with my life...
-: I am really tired...i need to go to sleep, i will do something about this tomorrow.
+: ...another expense that maybe wasnt necessary... #line:0dd8045 
+: Ah, so many things, what am I doing with my life... #line:00f0b33 
+: I am really tired...i need to go to sleep, i will do something about this tomorrow. #line:0222bad 
 <<transition_Scene4Images GameManager>>
 ===
 

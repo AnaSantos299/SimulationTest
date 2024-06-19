@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Yarn.Unity;
 
-public class GameManager1 : MonoBehaviour
+public class PuzzleLogic : MonoBehaviour
 {
     [SerializeField] private Transform gameTransform;
     [SerializeField] private Transform piecePrefab;
@@ -13,16 +14,16 @@ public class GameManager1 : MonoBehaviour
     private int size;
     private bool shuffling = false;
 
+    //Buttons for the user to decide if the image is essential for them or not
     public GameObject EssentialBT;
     public GameObject Non_EssentialBT;
 
-    public TextMeshProUGUI subtitles;
-    public GameObject BG;
+    //DialogueRunner for the yarn subtitles
+    public DialogueRunner dialogueRunner;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(PuzzleSubtitles());
         //initialize the list
         pieces = new List<Transform>();
         //the puzzle will be 3 by 3
@@ -117,6 +118,9 @@ public class GameManager1 : MonoBehaviour
             // Check for completion after each valid move
             if (!shuffling && CheckCompletion())
             {
+                dialogueRunner.Stop();
+                //start dialogue from Scene4_EN.yarn
+                dialogueRunner.StartDialogue("firstPuzzleSub");
                 EssentialBT.SetActive(true);
                 Non_EssentialBT.SetActive(true);
             }
@@ -169,19 +173,5 @@ public class GameManager1 : MonoBehaviour
                 count++;
             }
         }
-    }
-
-    public IEnumerator PuzzleSubtitles()
-    {
-        subtitles.SetText("Oh...What is this?");
-        yield return new WaitForSeconds(4);
-        subtitles.SetText("Hang on... Am I still sleeping? A puzzle??");
-        yield return new WaitForSeconds(6);
-        subtitles.SetText("Let me try to solve it...");
-        yield return new WaitForSeconds(4);
-        subtitles.SetText("");
-        BG.SetActive(false);
-
-
     }
 }
