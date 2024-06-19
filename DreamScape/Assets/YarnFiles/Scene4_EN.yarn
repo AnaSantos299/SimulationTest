@@ -17,7 +17,7 @@ tags:
 title: Scene5Transaction
 tags:
 ---
-: All this puzzles...are they gonna end?
-: I am seing something, what is happening?
+: All this puzzles...are they gonna end? #line:0f44df0 
+: I am seing something, what is happening? #line:0ed5275 
 <<changeToScene5 GameManager>>
 ===
