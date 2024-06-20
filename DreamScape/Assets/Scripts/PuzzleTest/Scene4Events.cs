@@ -21,7 +21,9 @@ public class Scene4Events : MonoBehaviour
     //--------------------------------ESSENTIAL AND NON-ESSENTIAL BUTTON LOGIC--------------------------------
     public void Essential()
     {
-       
+        //Stop the dialogue active
+        dialogueRunner.Stop();
+        //add the word shoes to the essential list
         essentialList.Add("shoes");
         Debug.Log("Add to essential List");
         if (puzzlelogic != null)
@@ -48,6 +50,9 @@ public class Scene4Events : MonoBehaviour
     //Non-essential button
     public void Non_essential()
     {
+        //Stop the dialogue active
+        dialogueRunner.Stop();
+        //Add the shoes to the non-essential list
         nonEssentialList.Add("shoes");
         Debug.Log("Add to Non-essential List");
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using TMPro;
+using Yarn.Unity;
 
 public class ImagesManager : MonoBehaviour
 {
@@ -11,8 +11,9 @@ public class ImagesManager : MonoBehaviour
     public Image displayImage;  // UI Image component to display the images
     public Button nextButton;   // UI Button to navigate through images
     public string nextSceneName; // Name of the scene to switch to
-    public TextMeshProUGUI Subtitles;
-    public GameObject BG;
+
+    //DialogueRunner for the yarn subtitles
+    public DialogueRunner dialogueRunner;
 
     private int currentIndex = 0;
 
@@ -39,15 +40,15 @@ public class ImagesManager : MonoBehaviour
         }
         else
         {
-            BG.SetActive(true);
-            StartCoroutine(SubtitlesScene6());
+            //Stop previous dialogue
+            dialogueRunner.Stop();
+            //Start Scene5Transaction Dialogue
+            dialogueRunner.StartDialogue("Scene6_EN");
         }
     }
-
-    private IEnumerator SubtitlesScene6()
+    [YarnCommand("changeToScene7")]
+    public void ChangeToScene7()
     {
-            Subtitles.text = "Uaah! I am getting tired... I think I am going to bed.";
-            yield return new WaitForSeconds(5f);
             SceneManager.LoadScene("Scene7");
     }
 }

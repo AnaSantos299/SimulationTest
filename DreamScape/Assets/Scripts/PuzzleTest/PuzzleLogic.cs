@@ -142,13 +142,6 @@ public class PuzzleLogic : MonoBehaviour
         return true;
     }
 
-    public IEnumerator WaitShuffle(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        Shuffle();
-        shuffling = false;
-    }
-
     private void Shuffle()
     {
         int count = 0;
@@ -173,5 +166,13 @@ public class PuzzleLogic : MonoBehaviour
                 count++;
             }
         }
+    }
+
+    //---------------COROUTINE-------------------------
+    public IEnumerator WaitShuffle(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        Shuffle();
+        shuffling = false;
     }
 }

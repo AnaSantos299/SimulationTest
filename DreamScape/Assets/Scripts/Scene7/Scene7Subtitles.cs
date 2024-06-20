@@ -19,7 +19,6 @@ public class Scene7Subtitles : MonoBehaviour
         if (images.Count > 0 && displayImage != null)
         {
             StartCoroutine(SlideshowCoroutine());
-            StartCoroutine(Scene5Subtitles());
         }
         else
         {
@@ -35,14 +34,6 @@ public class Scene7Subtitles : MonoBehaviour
             yield return new WaitForSeconds(displayTime); // Wait for the displayTime
         }
         SceneManager.LoadScene("Scene8");
-    }
-
-    private IEnumerator Scene5Subtitles()
-    {
-        Subtitles.text = ("UGH...I will get some rest, and tomorrow i will try to do a budgeting.");
-        yield return new WaitForSeconds(4);
-        BG.SetActive(false);
-        Subtitles.SetText("");
     }
 
 }
