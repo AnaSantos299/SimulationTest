@@ -16,10 +16,6 @@ public class DraggableText : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public ObjectsManager objectsManager;
 
-    //UI After inserting the text in the spots
-    [SerializeField] private TextMeshProUGUI UIText;
-    [SerializeField] private GameObject bgUIText;
-
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -44,7 +40,6 @@ public class DraggableText : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
-
     public void OnEndDrag(PointerEventData eventData)
     {
         isDragging = false;
@@ -68,7 +63,9 @@ public class DraggableText : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                     if (correctDropsCount == totalImagesCount)
                     {
                         // All images are in correct places, start coroutine
-                        StartCoroutine(AllImagesCorrectCoroutine());
+                        Debug.Log("All images are in correct places!");
+                        objectsManager.HideObjects();
+                        objectsManager.ShowObjects();
                     }
                     return;
                 }
@@ -79,20 +76,4 @@ public class DraggableText : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         rectTransform.anchoredPosition = initialPosition;
         Debug.Log("Incorrect drop, returning to initial position.");
     }
-
-    IEnumerator AllImagesCorrectCoroutine()
-    {
-        Debug.Log("All images are in correct places!");
-        UIText.text = "Take a moment to read the envelops";
-        bgUIText.SetActive(true);
-        yield return new WaitForSeconds(4f);
-        UIText.text = "";
-        bgUIText.SetActive(false);
-        yield return new WaitForSeconds(4f);
-        objectsManager.HideObjects();
-        objectsManager.ShowObjects();
-
-        yield return null;
-    }
 }
-

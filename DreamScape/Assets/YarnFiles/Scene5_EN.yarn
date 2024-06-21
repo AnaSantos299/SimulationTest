@@ -1,9 +1,9 @@
 ﻿title: Scene5_EN
 tags:
 ---
-: UGH...What was that?
-: A dream? I spent a lot of money on those things...
-: I need to figure out a plan to manage my finances better.
-: Let me go to the computer and look for something...
+: UGH...What was that? #line:0d6212a 
+: A dream? I spent a lot of money on those things... #line:016480d 
+: I need to figure out a plan to manage my finances better. #line:0e93978 
+: Let me go to the computer and look for something... #line:03601bb 
 <<transitionToScene6 GameManager>>
 ===

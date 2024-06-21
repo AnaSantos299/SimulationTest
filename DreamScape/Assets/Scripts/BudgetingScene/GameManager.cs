@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using Yarn.Unity;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,14 +19,13 @@ public class GameManager : MonoBehaviour
     private int correctDropCount = 0; // Counter to keep track of correct drops
     private int totalDropCount; // Total number of drop spots
 
-    public TextMeshProUGUI subtitlesScene8;
-    public GameObject BG;
+    //DialogueRunner for the yarn subtitles
+    public DialogueRunner dialogueRunner;
 
     void Start()
     {
         // Count the total number of drop spots
         totalDropCount = GameObject.FindGameObjectsWithTag("DropSpot").Length;
-        StartCoroutine(Scene8Subtitles());
     }
 
     public void UpdateDropStatus(bool isCorrectDrop)
@@ -41,13 +41,16 @@ public class GameManager : MonoBehaviour
         // Check if all draggable images are in the correct spots
         if (correctDropCount == totalDropCount)
         {
+            //Stop previous dialogue
+            dialogueRunner.Stop();
+            //Start Dialogue
+            dialogueRunner.StartDialogue("incomeDialogue");
             // All correct drops, display input field and text fields
             incomeInputField.gameObject.SetActive(true);
             needsBG.gameObject.SetActive(true);
             wantsBG.gameObject.SetActive(true);
             savingsBG.gameObject.SetActive(true);
             SubmitButton.gameObject.SetActive(true);
-
         }
         else
         {
@@ -64,6 +67,7 @@ public class GameManager : MonoBehaviour
     {
         if (float.TryParse(incomeInputField.text, out float income))
         {
+            dialogueRunner.StartDialogue("confirmIncome");
             float needsAmount = income * 0.50f;
             float wantsAmount = income * 0.30f;
             float savingsAmount = income * 0.20f;
@@ -78,18 +82,4 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Invalid input for income.");
         }
     }
-
-    private IEnumerator Scene8Subtitles()
-    {
-        subtitlesScene8.text = ("Ah...What is this? Again?");
-        yield return new WaitForSeconds(4);
-        subtitlesScene8.text = ("Am I going crazy?");
-        yield return new WaitForSeconds(4);
-        subtitlesScene8.text = ("Oh, this is about what i was searching...let me try connecting the things by dragging them.");
-        yield return new WaitForSeconds(6);
-        BG.SetActive(false);
-        subtitlesScene8.SetText("");
-    }
 }
-
-
