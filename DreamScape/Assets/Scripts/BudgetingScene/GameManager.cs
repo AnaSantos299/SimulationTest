@@ -67,6 +67,9 @@ public class GameManager : MonoBehaviour
     {
         if (float.TryParse(incomeInputField.text, out float income))
         {
+            //stop previous dialogue
+            dialogueRunner.Stop();
+            //Start new dialogue
             dialogueRunner.StartDialogue("confirmIncome");
             float needsAmount = income * 0.50f;
             float wantsAmount = income * 0.30f;

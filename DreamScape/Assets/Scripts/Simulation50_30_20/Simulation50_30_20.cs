@@ -1,26 +1,35 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using Yarn.Unity;
 
 public class Simulation50_30_20 : MonoBehaviour
 {
+    //inputfields
     public TMP_InputField incomeInputField;
     public TMP_InputField needsInputField;
     public TMP_InputField wantsInputField;
     public TMP_InputField savingsInputField;
+    //text for the results
     public TextMeshProUGUI resultsText;
+    //black background for the results
     public GameObject BGResults;
-
+    //Button submit choices
+    public GameObject SubmitChoicesBT;
+    //Simulation text
     public TextMeshProUGUI simulationText;
-
+    // variables to save the information from the input fields
     private float income;
     private float allocatedNeeds;
     private float allocatedWants;
     private float allocatedSavings;
 
+    //DialogueRunner for the yarn subtitles
+    public DialogueRunner dialogueRunner;
+
     // Call this method when the player submits their allocation
     public void OnSubmit()
     {
+        dialogueRunner.Stop();
         GetPlayerInput();
         if (IsAllocationValid())
         {
@@ -50,6 +59,7 @@ public class Simulation50_30_20 : MonoBehaviour
 
     void SimulateExpenses()
     {
+        SubmitChoicesBT.SetActive(false);
         // Example scenarios with random expense values
         int scenario = Random.Range(0, 3);
         switch (scenario)

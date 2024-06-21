@@ -2,19 +2,25 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
 using TMPro;
+using Yarn.Unity;
 
 public class DraggableText : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private RectTransform rectTransform;
     private Canvas canvas;
+    //initial position of the text
     private Vector2 initialPosition;
     private string correctDropSpot; // Identifier of the correct drop spot
     private bool isDragging;
-
+    //count of the drops to check when all the texts are in the correct drop
     private static int correctDropsCount = 0;
+    //total of images
     private static int totalImagesCount = 0;
-
+    //has access to the script objects manager, where there is a list showing and hiding objects
     public ObjectsManager objectsManager;
+
+    //DialogueRunner for the yarn subtitles
+    public DialogueRunner dialogueRunner;
 
     void Start()
     {
@@ -30,12 +36,12 @@ public class DraggableText : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         // Increment the total images count
         totalImagesCount++;
     }
-
+    //when dragging the texts
     public void OnBeginDrag(PointerEventData eventData)
     {
         isDragging = true;
     }
-
+    //Dragging logic
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
@@ -62,6 +68,8 @@ public class DraggableText : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                     // Check if all images are in correct places
                     if (correctDropsCount == totalImagesCount)
                     {
+                        dialogueRunner.Stop();
+                        dialogueRunner.StartDialogue("fillBlanks");
                         // All images are in correct places, start coroutine
                         Debug.Log("All images are in correct places!");
                         objectsManager.HideObjects();
