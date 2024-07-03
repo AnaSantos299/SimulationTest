@@ -62,17 +62,21 @@ public class GameManager : MonoBehaviour
             SubmitButton.gameObject.SetActive(false);
         }
     }
-
+    //caculate the distrubition of the income given by the player
     public void CalculateBudgetDistribution()
     {
+        //parse the text of the inputfield to the income variable
         if (float.TryParse(incomeInputField.text, out float income))
         {
             //stop previous dialogue
             dialogueRunner.Stop();
             //Start new dialogue
             dialogueRunner.StartDialogue("confirmIncome");
+            //sets 50% of the income to the needs
             float needsAmount = income * 0.50f;
+            //sets 30% of the income to the wants
             float wantsAmount = income * 0.30f;
+            //sets 20% of the income to the savings
             float savingsAmount = income * 0.20f;
 
             // Display calculated values

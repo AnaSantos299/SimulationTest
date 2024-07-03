@@ -6,7 +6,9 @@ public class BudgetManager : MonoBehaviour
     //inputfield for the user budgeting
     public TMP_InputField budgetInputField; 
     //array containing the values that will be displayed
-    public TMP_Text[] valueTexts; 
+    public TMP_Text[] valueTexts;
+
+    public GameObject ValuesUI;
 
     // Dritibute the user budget into x random values, in this case 6
     public void DistributeBudget()
@@ -14,7 +16,8 @@ public class BudgetManager : MonoBehaviour
         // Parse the input field text into a float (totalBudget)
         if (float.TryParse(budgetInputField.text, out float totalBudget))
         {
-            float[] values = GenerateRandomValues(totalBudget, 6); //generate 6 random values
+            ValuesUI.SetActive(true);
+            float[] values = GenerateRandomValues(totalBudget, 10); //generate  random values
 
             for (int i = 0; i < values.Length; i++)
             {
