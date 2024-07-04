@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Yarn.Unity;
 
 public class BudgetManager : MonoBehaviour
 {
@@ -10,9 +11,16 @@ public class BudgetManager : MonoBehaviour
 
     public GameObject ValuesUI;
 
+    // DialogueRunner for the yarn subtitles
+    public DialogueRunner dialogueRunner;
+
     // Dritibute the user budget into x random values, in this case 6
     public void DistributeBudget()
     {
+        //Stop previous dialogue
+        dialogueRunner.Stop();
+        //Start new dialogue
+        dialogueRunner.StartDialogue("valuesAppear");
         // Parse the input field text into a float (totalBudget)
         if (float.TryParse(budgetInputField.text, out float totalBudget))
         {
