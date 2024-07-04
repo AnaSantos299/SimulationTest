@@ -5,16 +5,20 @@ using Yarn.Unity;
 
 public class GameManager : MonoBehaviour
 {
-    public TMP_InputField incomeInputField; // Assign in the inspector
-    public TextMeshProUGUI needsText; // Assign in the inspector
-    public TextMeshProUGUI wantsText; // Assign in the inspector
-    public TextMeshProUGUI savingsText; // Assign in the inspector
+    //input field of the income
+    public TMP_InputField incomeInputField;
+    //text for the needs
+    public TextMeshProUGUI needsText;
+    //text for the wants
+    public TextMeshProUGUI wantsText;
+    //text for the savings
+    public TextMeshProUGUI savingsText;
+    //button to subtim the income
+    public GameObject SubmitButton;
+    //list to keep the game objects of the values, make it cleaner to activate and deactivate them
+    public GameObject[] TextDragAndDrops;
 
-    public GameObject needsBG; // Assign in the inspector
-    public GameObject wantsBG; // Assign in the inspector
-    public GameObject savingsBG; // Assign in the inspector
 
-    public GameObject SubmitButton; // Assign in the inspector
 
     private int correctDropCount = 0; // Counter to keep track of correct drops
     private int totalDropCount; // Total number of drop spots
@@ -47,24 +51,18 @@ public class GameManager : MonoBehaviour
             dialogueRunner.StartDialogue("incomeDialogue");
             // All correct drops, display input field and text fields
             incomeInputField.gameObject.SetActive(true);
-            needsBG.gameObject.SetActive(true);
-            wantsBG.gameObject.SetActive(true);
-            savingsBG.gameObject.SetActive(true);
             SubmitButton.gameObject.SetActive(true);
-        }
-        else
-        {
-            // Not all correct drops, hide input field and text fields
-            incomeInputField.gameObject.SetActive(false);
-            needsBG.gameObject.SetActive(false);
-            wantsBG.gameObject.SetActive(false);
-            savingsBG.gameObject.SetActive(false);
-            SubmitButton.gameObject.SetActive(false);
         }
     }
     //caculate the distrubition of the income given by the player
     public void CalculateBudgetDistribution()
     {
+        //set all the objects of the array setactive true
+        foreach (GameObject obj in TextDragAndDrops)
+        {
+            obj.SetActive(true);
+        }
+
         //parse the text of the inputfield to the income variable
         if (float.TryParse(incomeInputField.text, out float income))
         {

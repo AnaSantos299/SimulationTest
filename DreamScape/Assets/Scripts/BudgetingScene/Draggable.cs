@@ -3,92 +3,90 @@ using UnityEngine.EventSystems;
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    // Cached references
     private RectTransform rectTransform;
     private Canvas canvas;
+    private CanvasGroup canvasGroup;
+    private GameManager gameManager;
+
+    // initial position
     private Vector2 initialPosition;
-    private string correctDropSpot; // Identifier of the correct drop spot
-    private bool isDragging;
-    private GameManager gameManager; // Reference to the GameManager
-    private CanvasGroup canvasGroup; // For controlling raycast blocking
-    private int originalSiblingIndex; // To store the original sibling index for resetting
+    // correct drop spot
+    private string correctDropSpot; 
 
     void Start()
     {
+        // Initialize component references
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
+        canvasGroup = GetComponent<CanvasGroup>() ?? gameObject.AddComponent<CanvasGroup>();
+
+        // Save the initial position of the draggable item
         initialPosition = rectTransform.anchoredPosition;
-        isDragging = false;
 
-        // Assign the correct drop spot identifier based on the draggable image's name
-        string imageName = gameObject.name.ToLower(); // Assuming the image name matches the drop spot name
-        correctDropSpot = imageName;
+        // Determine the correct drop spot based on the draggable item's name, Assuming the image name matches the drop spot name
+        correctDropSpot = gameObject.name.ToLower();
 
-        gameManager = FindObjectOfType<GameManager>(); // Find the GameManager in the scene
-        canvasGroup = GetComponent<CanvasGroup>();
+        // Cache reference to the GameManager
+        gameManager = FindObjectOfType<GameManager>();
 
-        // If CanvasGroup is not attached, add it dynamically
-        if (canvasGroup == null)
+        // Log warning if critical references are missing
+        if (gameManager == null)
         {
-            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+            Debug.LogWarning("GameManager not found in the scene.");
         }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        isDragging = true;
-
-        // Save the original sibling index
-        originalSiblingIndex = rectTransform.GetSiblingIndex();
-
-        // Bring the draggable item to the front of its parent
-        rectTransform.SetSiblingIndex(rectTransform.parent.childCount - 1);
-
-        // Disable raycast blocking for the draggable item during drag
-        if (canvasGroup != null)
-        {
-            canvasGroup.blocksRaycasts = false;
-        }
+        // Disable raycast blocking during drag
+        canvasGroup.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         // Update the position of the draggable item
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        if (canvas != null)
+        {
+            rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        isDragging = false;
-
         // Re-enable raycast blocking after drag ends
-        if (canvasGroup != null)
-        {
-            canvasGroup.blocksRaycasts = true;
-        }
+        canvasGroup.blocksRaycasts = true;
 
-        // Reset the draggable item to its original sibling index
-        rectTransform.SetSiblingIndex(originalSiblingIndex);
-
-        // Check if the dragged image is dropped on the correct drop spot
+        // Check if dropped on a valid drop spot
         if (eventData.pointerEnter != null)
         {
             GameObject dropTarget = eventData.pointerEnter.gameObject;
             if (dropTarget.CompareTag("DropSpot"))
             {
-                // Check if the drop target matches the correct drop spot for this image
+                // Check if the drop target matches the correct drop spot
                 if (dropTarget.name.ToLower() == correctDropSpot)
                 {
-                    // Correct drop, call GameManager to update drop status
-                    UnityEngine.Debug.Log("Correct drop! Drop target name: " + dropTarget.name);
-                    gameManager.UpdateDropStatus(true);
+                    // Correct drop
+                    Debug.Log("Correct drop! Drop target name: " + dropTarget.name);
+                    gameManager?.UpdateDropStatus(true);
+
+                    // Optionally, disable further interactions (make it non-interactable)
+                    SetInteractable(false);
+
                     return;
                 }
             }
         }
 
-        // Incorrect drop, return the dragged image to its initial position and call GameManager to update drop status
+        // Incorrect drop: return to initial position
         rectTransform.anchoredPosition = initialPosition;
-        UnityEngine.Debug.Log("Incorrect drop, returning to initial position.");
-        gameManager.UpdateDropStatus(false);
+        Debug.Log("Incorrect drop, returning to initial position.");
+        gameManager?.UpdateDropStatus(false);
+    }
+
+    // Method to make the object non-interactable
+    private void SetInteractable(bool interactable)
+    {
+        canvasGroup.blocksRaycasts = interactable;
     }
 }

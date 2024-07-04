@@ -16,7 +16,7 @@ tags:
 title: confirmIncome
 tags:
 ---
-: The blank spaces were filed with some amounts...  #line:04121ff 
+: What is this? Some values just appeared...  #line:04121ff 
 : Is this the 50-30-20 distribution of my income?  #line:03ab538 
 : Let me drag them to the right places, under the envelops.  #line:0e581f9 
 ===
@@ -24,7 +24,20 @@ tags:
 title: fillBlanks
 tags:
 ---
-: The amounts disapeared? What should I do? #line:050b2c1 
+: The pieces of paper just disapeared? What should I do? #line:050b2c1 
 : Oh, is it my time to distribute my income without any help? #line:018711b 
 : Alright, what amount should I insert in each one of the blanks? Let me see... #line:0ecb0d0 
+===
+
+title: exceedIncome
+tags:
+---
+: Looks like my distribution is going over my income...
+: Let me try again, this time i should try having in consideration my income.
+===
+
+title: emptyTextFields
+tags:
+---
+: Oh...i forgot to fill in something, let me check what and then submit again.
 ===

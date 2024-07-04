@@ -4,33 +4,48 @@ using Yarn.Unity;
 
 public class Simulation50_30_20 : MonoBehaviour
 {
-    //inputfields
+    // Input fields
     public TMP_InputField incomeInputField;
     public TMP_InputField needsInputField;
     public TMP_InputField wantsInputField;
     public TMP_InputField savingsInputField;
-    //text for the results
+
+    // Text for the results
     public TextMeshProUGUI resultsText;
-    //black background for the results
+
+    // Black background for the results
     public GameObject BGResults;
-    //Button submit choices
+
+    // Button submit choices
     public GameObject SubmitChoicesBT;
-    //Simulation text
+
+    // Simulation text
     public TextMeshProUGUI simulationText;
-    // variables to save the information from the input fields
+
+    // Variables to save the information from the input fields
     private float income;
     private float allocatedNeeds;
     private float allocatedWants;
     private float allocatedSavings;
 
-    //DialogueRunner for the yarn subtitles
+    // DialogueRunner for the yarn subtitles
     public DialogueRunner dialogueRunner;
 
     // Call this method when the player submits their allocation
     public void OnSubmit()
     {
         dialogueRunner.Stop();
+
+        // Check if any input field is empty
+        if (IsAnyInputEmpty())
+        {
+            dialogueRunner.StartDialogue("emptyTextFields");
+            Debug.LogError("Please fill in all input fields.");
+            return;
+        }
+
         GetPlayerInput();
+
         if (IsAllocationValid())
         {
             SimulateExpenses();
@@ -38,6 +53,7 @@ public class Simulation50_30_20 : MonoBehaviour
         }
         else
         {
+            dialogueRunner.StartDialogue("exceedIncome");
             Debug.LogError("Allocation exceeds income! Please allocate within your income.");
         }
     }
@@ -57,6 +73,15 @@ public class Simulation50_30_20 : MonoBehaviour
         return (allocatedNeeds + allocatedWants + allocatedSavings) <= income;
     }
 
+    bool IsAnyInputEmpty()
+    {
+        // Check if any of the input fields are empty
+        return string.IsNullOrEmpty(incomeInputField.text) ||
+               string.IsNullOrEmpty(needsInputField.text) ||
+               string.IsNullOrEmpty(wantsInputField.text) ||
+               string.IsNullOrEmpty(savingsInputField.text);
+    }
+
     void SimulateExpenses()
     {
         SubmitChoicesBT.SetActive(false);
@@ -67,7 +92,7 @@ public class Simulation50_30_20 : MonoBehaviour
             case 0:
                 Debug.Log("Regular month");
                 simulationText.text = "Needs: Your car broke down, and the repair cost was 200 euros. " +
-                    "\n Wants: A new gadget you wanted was released and you couldn't resist buying it, which cost 150 euros more than your planned budget." + 
+                    "\n Wants: A new gadget you wanted was released and you couldn't resist buying it, which cost 150 euros more than your planned budget." +
                     "\n Savings: You managed to save an extra 200 euros by cutting down on dining out.";
                 break;
             case 1:
