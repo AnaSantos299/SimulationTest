@@ -1,32 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    public FixedJoystick joystick;
-    private float moveSpeed = 3;
+    public float moveSpeed = 5f;
 
-    private Rigidbody rb;
-
-    void Start()
+    void Update()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true; // Make sure the object doesn't rotate due to physics
-    }
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
 
-    void FixedUpdate()
-    {
-        Move();
-    }
+        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
-    public void Move()
-    {
-        float horizontal = joystick.Horizontal;
-        float vertical = joystick.Vertical;
+        if (movement.magnitude >= 0.1f)
+        {
+            // Calculate movement direction based on camera facing direction
+            float targetAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-        Vector3 movement = new Vector3(horizontal, 0f, vertical).normalized * moveSpeed * Time.deltaTime;
-
-        rb.MovePosition(transform.position + transform.TransformDirection(movement));
+            // Apply movement
+            transform.position += moveDir.normalized * moveSpeed * Time.deltaTime;
+        }
     }
 }
+
+

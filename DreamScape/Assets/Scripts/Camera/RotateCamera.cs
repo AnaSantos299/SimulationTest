@@ -1,31 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateCamera : MonoBehaviour
+public class CameraRotation : MonoBehaviour
 {
-    [SerializeField] private Transform PlayerBody;
-    public FixedJoystick joystick;
-    public Vector2 sensitivity = new Vector2(40f, 40f);
-    private float currentRotationX = 0f;
+    public float mouseSensitivity = 100f;
+    public Transform playerBody; // Reference to the player's transform (assign in Unity Editor)
+
+    private float rotationX = 0f; // Current rotation around the X-axis
+
+    void Start()
+    {
+        // Lock and hide cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     void Update()
     {
-        float horizontalInput = joystick.Horizontal;
-        float verticalInput = joystick.Vertical;
+        // Input for mouse movement
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        // Calculate rotation amount based on joystick input
-        float rotationX = horizontalInput * sensitivity.x * Time.deltaTime;
-        float rotationY = verticalInput * sensitivity.y * Time.deltaTime;
+        // Rotate the player horizontally (Y-axis)
+        playerBody.Rotate(Vector3.up * mouseX);
 
-        // Rotate the player body horizontally
-        PlayerBody.Rotate(Vector3.up * rotationX);
+        // Calculate vertical rotation
+        rotationX -= mouseY;
+        rotationX = Mathf.Clamp(rotationX, -90f, 90f); // Clamp to prevent camera flipping
 
-        // Update the current rotation for vertical rotation
-        currentRotationX -= rotationY;
-        currentRotationX = Mathf.Clamp(currentRotationX, -45f, 45f);
-
-        // Rotate the camera vertically (assuming the camera is a child of PlayerBody)
-        transform.localRotation = Quaternion.Euler(currentRotationX, 0f, 0f);
+        // Rotate the camera vertically (X-axis)
+        transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
     }
 }
