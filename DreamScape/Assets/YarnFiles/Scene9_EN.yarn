@@ -1,15 +1,22 @@
 ﻿title: Scene9_EN
 tags:
 ---
-: What is all of this?
-: A blank piece of paper and a button saying confirm?
-: Let me try to insert my income in the piece of paper and submit it.
+: What is all of this? #line:0eee818 
+: A blank piece of paper and a button saying confirm? #line:0d14611 
+: Let me try to insert my income in the piece of paper and submit it. #line:0c04115 
 ===
 
 title: valuesAppear
 tags:
 ---
-: Oh, so many piece of papers with different values...
-: I think this is my income devided in 10 piece of papers.
-: Let me alocate it in the envelops in order to create a budgeting.
+: Oh, so many piece of papers with different values... #line:01be45b 
+: I think this is my income devided in 10 piece of papers. #line:014411a 
+: Let me alocate it in the envelops in order to create a budgeting. #line:0e7908f 
+===
+
+title: AllValues
+tags:
+---
+: OK, i have distributed my money until i reached 0. #line:0823e83 
+: Now is time to close the envelops. #line:0289620 
 ===

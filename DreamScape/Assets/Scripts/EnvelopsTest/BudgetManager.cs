@@ -1,35 +1,40 @@
 using UnityEngine;
 using TMPro;
+using System.Linq;
 using Yarn.Unity;
 
 public class BudgetManager : MonoBehaviour
 {
-    //inputfield for the user budgeting
-    public TMP_InputField budgetInputField; 
-    //array containing the values that will be displayed
+    // Input field for the user budgeting
+    public TMP_InputField budgetInputField;
+    // Array containing the text components that will display values
     public TMP_Text[] valueTexts;
 
     public GameObject ValuesUI;
 
-    // DialogueRunner for the yarn subtitles
+    // DialogueRunner for the Yarn dialogue system
     public DialogueRunner dialogueRunner;
 
-    // Dritibute the user budget into x random values, in this case 6
+    // Minimum value for each generated number
+    public float minValue = 50.0f;
+
+    // Distribute the user budget into x random values
     public void DistributeBudget()
     {
-        //Stop previous dialogue
+        // Stop any ongoing dialogue
         dialogueRunner.Stop();
-        //Start new dialogue
+        // Start new dialogue
         dialogueRunner.StartDialogue("valuesAppear");
+
         // Parse the input field text into a float (totalBudget)
         if (float.TryParse(budgetInputField.text, out float totalBudget))
         {
             ValuesUI.SetActive(true);
-            float[] values = GenerateRandomValues(totalBudget, 10); //generate  random values
+            float[] values = GenerateRandomValues(totalBudget, valueTexts.Length); // Generate random values
 
             for (int i = 0; i < values.Length; i++)
             {
-                //Display each value in the array to the texts
+                // Display each value in the array to the texts
                 valueTexts[i].text = values[i].ToString("F2"); // Format the value to 2 decimal places
             }
         }
@@ -43,36 +48,32 @@ public class BudgetManager : MonoBehaviour
     private float[] GenerateRandomValues(float totalBudget, int numberOfValues)
     {
         float[] values = new float[numberOfValues];
-        float[] randomValues = new float[numberOfValues - 1];
+        float remainingBudget = totalBudget;
 
-        // Generate random values within the range [0, totalBudget]
-        for (int i = 0; i < randomValues.Length; i++)
+        for (int i = 0; i < numberOfValues - 1; i++)
         {
-            randomValues[i] = Random.Range(0, totalBudget);
+            float maxValue = remainingBudget - minValue * (numberOfValues - 1 - i);
+            values[i] = Random.Range(minValue, Mathf.Min(maxValue, totalBudget));
+            remainingBudget -= values[i];
         }
 
-        // Sort the random values
-        System.Array.Sort(randomValues);
+        values[numberOfValues - 1] = remainingBudget;
 
-        // Calculate the values based on the sorted random points
-        for (int i = 0; i < numberOfValues; i++)
-        {
-            if (i == 0)
-            {
-                values[i] = randomValues[i]; // First value from 0 to the first value
-            }
-            else if (i == numberOfValues - 1)
-            {
-                values[i] = totalBudget - randomValues[i - 1]; // Last value from the last value to the total budget
-            }
-            else
-            {
-                values[i] = randomValues[i] - randomValues[i - 1]; // Intermediate values
-            }
-        }
+        // Shuffle the array to randomize values' order
+        ShuffleArray(values);
 
         return values;
     }
+
+    // Helper function to shuffle an array
+    private void ShuffleArray<T>(T[] array)
+    {
+        for (int i = array.Length - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            T temp = array[i];
+            array[i] = array[randomIndex];
+            array[randomIndex] = temp;
+        }
+    }
 }
-
-

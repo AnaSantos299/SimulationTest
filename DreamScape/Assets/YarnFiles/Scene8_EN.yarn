@@ -32,12 +32,12 @@ tags:
 title: exceedIncome
 tags:
 ---
-: Looks like my distribution is going over my income...
-: Let me try again, this time i should try having in consideration my income.
+: Looks like my distribution is going over my income... #line:0e240f7 
+: Let me try again, this time i should try having in consideration my income. #line:041cb9a 
 ===
 
 title: emptyTextFields
 tags:
 ---
-: Oh...i forgot to fill in something, let me check what and then submit again.
+: Oh...i forgot to fill in something, let me check what and then submit again. #line:0c4b3ad 
 ===
