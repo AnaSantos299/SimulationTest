@@ -3,10 +3,10 @@ tags:
 ---
 : Ah...What are all this messages? #line:line_1 
 <<makePhoneVisible GameManager>>
-Your Inner Voice: What is happening? #line:line_2
+: What is happening? #line:line_2
 <<makePhoneOpenMessageVisible GameManager>>
-Your Inner Voice: They are all from bills... #line:line_3
-Your Inner Voice: I should check my bank account #line:line_4
+: They are all from bills... #line:line_3
+: I should check my bank account #line:line_4
 <<makePhoneAppsVisible GameManager>>
 ===
 
@@ -14,7 +14,7 @@ Your Inner Voice: I should check my bank account #line:line_4
 title: OpenBankApp
 tags:
 ---
-Your Inner Voice: How do i only have this money? This isnt possible... #line:line_5
-Your Inner Voice: I should head home and check where has all my money gone to. #line:line_6
+: I'm running low on foudings... #line:line_5
+: I should head home and check where has all my money gone to. #line:line_6
 <<returnHome GameManager>>
 ===

@@ -538,7 +538,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &506651600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2295,7 +2295,6 @@ MonoBehaviour:
   dialogueViews:
   - {fileID: 7778558435968008528}
   - {fileID: 3292657647866328228}
-  - {fileID: 1390491142}
   startNode: Scene2Start
   startAutomatically: 1
   runSelectedOptionAsLine: 0
@@ -3109,7 +3108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.2509804}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.74509805}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
