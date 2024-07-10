@@ -34,7 +34,7 @@ public class Scene4Events : MonoBehaviour
             BNon_Essential.SetActive(false);
             ClickCount++;
 
-            if (ClickCount >= 3)
+            if (ClickCount >= 1)
             {
                 //Stop previous dialogue
                 dialogueRunner.Stop();
@@ -64,7 +64,7 @@ public class Scene4Events : MonoBehaviour
             BNon_Essential.SetActive(false);
             ClickCount++;
 
-            if (ClickCount >= 3)
+            if (ClickCount >= 1)
             {
                 //Stop previous dialogue
                 dialogueRunner.Stop();

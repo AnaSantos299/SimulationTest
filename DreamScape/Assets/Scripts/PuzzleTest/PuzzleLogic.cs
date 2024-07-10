@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using Yarn.Unity;
 
 public class PuzzleLogic : MonoBehaviour
 {
@@ -14,12 +12,10 @@ public class PuzzleLogic : MonoBehaviour
     private int size;
     private bool shuffling = false;
 
-    //Buttons for the user to decide if the image is essential for them or not
     public GameObject EssentialBT;
     public GameObject Non_EssentialBT;
 
-    //DialogueRunner for the yarn subtitles
-    public DialogueRunner dialogueRunner;
+    public GameObject BG;
 
     // Start is called before the first frame update
     void Start()
@@ -118,9 +114,6 @@ public class PuzzleLogic : MonoBehaviour
             // Check for completion after each valid move
             if (!shuffling && CheckCompletion())
             {
-                dialogueRunner.Stop();
-                //start dialogue from Scene4_EN.yarn
-                dialogueRunner.StartDialogue("firstPuzzleSub");
                 EssentialBT.SetActive(true);
                 Non_EssentialBT.SetActive(true);
             }
@@ -142,6 +135,13 @@ public class PuzzleLogic : MonoBehaviour
         return true;
     }
 
+    public IEnumerator WaitShuffle(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        Shuffle();
+        shuffling = false;
+    }
+
     private void Shuffle()
     {
         int count = 0;
@@ -149,30 +149,25 @@ public class PuzzleLogic : MonoBehaviour
         while (count < (size * size * size))
         {
             int rnd = Random.Range(0, size * size);
-            if (rnd == last ) { continue; }
+            if (rnd == last) { continue; }
             last = emptyLocation;
 
             if (SwapIfValid(rnd, -size, size))
             {
                 count++;
-            } else if (SwapIfValid(rnd, + size, size))
+            }
+            else if (SwapIfValid(rnd, +size, size))
             {
                 count++;
-            }else if (SwapIfValid(rnd, -1, 0))
+            }
+            else if (SwapIfValid(rnd, -1, 0))
             {
                 count++;
-            }else if (SwapIfValid(rnd, +1, size - 1))
+            }
+            else if (SwapIfValid(rnd, +1, size - 1))
             {
                 count++;
             }
         }
-    }
-
-    //---------------COROUTINE-------------------------
-    public IEnumerator WaitShuffle(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        Shuffle();
-        shuffling = false;
     }
 }

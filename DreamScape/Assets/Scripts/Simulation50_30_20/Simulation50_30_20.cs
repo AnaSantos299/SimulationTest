@@ -20,7 +20,9 @@ public class Simulation50_30_20 : MonoBehaviour
     public GameObject SubmitChoicesBT;
 
     // Simulation text
-    public TextMeshProUGUI simulationText;
+    public TextMeshProUGUI NeedsText;
+    public TextMeshProUGUI WantsText;
+    public TextMeshProUGUI SavingsText;
 
     // Variables to save the information from the input fields
     private float income;
@@ -53,8 +55,17 @@ public class Simulation50_30_20 : MonoBehaviour
         }
         else
         {
-            dialogueRunner.StartDialogue("exceedIncome");
-            Debug.LogError("Allocation exceeds income! Please allocate within your income.");
+            // Check if the allocation is less than the income
+            if ((allocatedNeeds + allocatedWants + allocatedSavings) < income)
+            {
+                dialogueRunner.StartDialogue("belowIncome");
+                Debug.LogError("Allocation is less than income! Please allocate the full income.");
+            }
+            else
+            {
+                dialogueRunner.StartDialogue("exceedIncome");
+                Debug.LogError("Allocation exceeds income! Please allocate within your income.");
+            }
         }
     }
 
@@ -69,8 +80,8 @@ public class Simulation50_30_20 : MonoBehaviour
 
     bool IsAllocationValid()
     {
-        // Check if the sum of allocated amounts exceeds income
-        return (allocatedNeeds + allocatedWants + allocatedSavings) <= income;
+        // Check if the sum of allocated amounts is within income
+        return (allocatedNeeds + allocatedWants + allocatedSavings) == income;
     }
 
     bool IsAnyInputEmpty()
@@ -91,21 +102,21 @@ public class Simulation50_30_20 : MonoBehaviour
         {
             case 0:
                 Debug.Log("Regular month");
-                simulationText.text = "Needs: Your car broke down, and the repair cost was 200 euros. " +
-                    "\n Wants: A new gadget you wanted was released and you couldn't resist buying it, which cost 150 euros more than your planned budget." +
-                    "\n Savings: You managed to save an extra 200 euros by cutting down on dining out.";
+                NeedsText.text = "Needs: Your car broke down, and the repair cost was 200 euros. ";
+                WantsText.text = "Wants: A new gadget you wanted was released and you couldn't resist buying it, which cost 150 euros more than your planned budget.";
+                SavingsText.text = "Savings: You managed to save an extra 200 euros by cutting down on dining out.";
                 break;
             case 1:
                 Debug.Log("Extra savings");
-                simulationText.text = "Needs: This month, your electricity bill was higher than expected due to a heatwave, costing you an extra 50 euros. " +
-                    "\n Wants: You found a great deal on a concert ticket, but it was still 80 euros more than you had planned for your wants." +
-                    "\nSavings: You received a small bonus at work of 100 euros, which you decided to add to your savings.";
+                NeedsText.text = "Needs: This month, your electricity bill was higher than expected due to a heatwave, costing you an extra 50 euros. ";
+                WantsText.text = "Wants: You found a great deal on a concert ticket, but it was still 80 euros more than you had planned for your wants.";
+                SavingsText.text = "Savings: You received a small bonus at work of 100 euros, which you decided to add to your savings.";
                 break;
             case 2:
                 Debug.Log("Emergency expense");
-                simulationText.text = "Needs: You had a medical emergency, and the out-of-pocket expenses were 500 euros. " +
-                    "\n Wants: You planned a spontaneous weekend getaway, which cost you 300 euros more than your wants budget. " +
-                    "\n Savings: Your savings account earned higher-than-expected interest, adding 250 euros to your savings this month.";
+                NeedsText.text = "Needs: You had a medical emergency, and the out-of-pocket expenses were 500 euros. ";
+                WantsText.text = "Wants: You planned a spontaneous weekend getaway, which cost you 300 euros more than your wants budget. ";
+                SavingsText.text = "Savings: Your savings account earned higher-than-expected interest, adding 250 euros to your savings this month.";
                 break;
         }
     }

@@ -1,15 +1,14 @@
 ﻿title: Scene8_EN
 tags:
 ---
-: Ah...What is this? Again? #line:021d877 
-: Am I going crazy? #line:0c9728e 
+: Ah...What is this? A game to test the knowledge about the 50-30-20 rule? #line:021d877 
 : Oh, this is about what i was searching...let me try dragging the envelops to the right position. #line:0a0a44a 
 ===
 
 title: incomeDialogue
 tags:
 ---
-: New fields? #line:0a41aab 
+: New information? #line:0a41aab 
 : Income? Looks like i should insert my monthly income here. #line:0790da7
 ===
 
@@ -40,4 +39,11 @@ title: emptyTextFields
 tags:
 ---
 : Oh...i forgot to fill in something, let me check what and then submit again. #line:0c4b3ad 
+===
+
+title: belowIncome
+tags:
+---
+: Looks like my distribution is going below my income... #line:0eed99f 
+: Let me try again, this time i should try having in consideration my income. #line:0841639 
 ===

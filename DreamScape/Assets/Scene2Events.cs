@@ -72,7 +72,7 @@ public class Scene2Events : MonoBehaviour
         foreach (Sprite image in images) //For each image, display one at a time with the interval of 3 seconds
         {
             displayImage.sprite = image; // Set the current image
-            yield return new WaitForSeconds(3f); // Wait for 3s
+            yield return new WaitForSeconds(2f); // Wait for 3s
         }
         //Chance scene after finishing showing all the images
         Debug.Log("Mudança de scene");
