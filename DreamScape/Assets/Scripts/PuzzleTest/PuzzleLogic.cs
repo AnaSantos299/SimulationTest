@@ -116,6 +116,10 @@ public class PuzzleLogic : MonoBehaviour
             {
                 EssentialBT.SetActive(true);
                 Non_EssentialBT.SetActive(true);
+            } else
+            {
+                EssentialBT.SetActive(false);
+                Non_EssentialBT.SetActive(false);
             }
 
             return true;

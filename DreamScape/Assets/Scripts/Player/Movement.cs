@@ -1,24 +1,55 @@
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float walkSpeed = 3f;
+    public float gravity = 10f;
 
-    void Update()
+    Vector3 moveDirection = Vector3.zero;
+    public bool canMove = true;
+
+    CharacterController characterController;
+
+    private void Start()
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
+        characterController = GetComponent<CharacterController>();
+    }
 
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput).normalized;
-
-        if (movement.magnitude >= 0.1f)
+    private void Update()
+    {
+        if (canMove)
         {
-            // Calculate movement direction based on camera facing direction
-            float targetAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            // Get input from the player
+            float moveDirectionY = moveDirection.y;
+            moveDirection = Vector3.zero;
 
-            // Apply movement
-            transform.position += moveDir.normalized * moveSpeed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveDirection += transform.forward * walkSpeed;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                moveDirection -= transform.forward * walkSpeed;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveDirection -= transform.right * walkSpeed;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveDirection += transform.right * walkSpeed;
+            }
+
+            // Apply gravity
+            moveDirection.y = moveDirectionY;
+            if (!characterController.isGrounded)
+            {
+                moveDirection.y -= gravity * Time.deltaTime;
+            }
+
+            // Move the character
+            characterController.Move(moveDirection * Time.deltaTime);
         }
     }
 }

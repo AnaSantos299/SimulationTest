@@ -70,6 +70,10 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
                     Debug.Log("Correct drop! Drop target name: " + dropTarget.name);
                     gameManager?.UpdateDropStatus(true);
 
+                    // Move the draggable item to the center of the drop spot
+                    RectTransform dropRectTransform = dropTarget.GetComponent<RectTransform>();
+                    rectTransform.anchoredPosition = dropRectTransform.anchoredPosition;
+
                     // Optionally, disable further interactions (make it non-interactable)
                     SetInteractable(false);
 
