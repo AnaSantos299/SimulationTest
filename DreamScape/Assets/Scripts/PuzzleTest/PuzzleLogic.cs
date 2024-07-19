@@ -149,8 +149,10 @@ public class PuzzleLogic : MonoBehaviour
     private void Shuffle()
     {
         int count = 0;
-        int last = 0;
-        while (count < (size * size * size))
+        int maxShuffles = (size * size) / 2; // Reduce the number of shuffles for easier difficulty
+        int last = emptyLocation;
+
+        while (count < maxShuffles)
         {
             int rnd = Random.Range(0, size * size);
             if (rnd == last) { continue; }
