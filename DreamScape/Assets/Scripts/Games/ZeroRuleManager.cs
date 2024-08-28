@@ -19,7 +19,7 @@ public class ZeroRuleManager : MonoBehaviour
 
     // Initialize total budget
     private float totalBudget = 1000f;
-    private float remainingBudget;
+    public float remainingBudget;
     private int currentUIIndex = 0;
 
     // Simulation text
@@ -102,11 +102,6 @@ public class ZeroRuleManager : MonoBehaviour
                     UpdateRemainingBudgetText();
 
                     currentUIIndex++; // Move to the next UI object
-
-                    if (remainingBudget <= 0)
-                    {
-                        EndBudgeting(); // End budgeting if budget is fully allocated
-                    }
                 }
                 else
                 {
@@ -130,14 +125,14 @@ public class ZeroRuleManager : MonoBehaviour
     {
         if (remainingBudgetText != null)
         {
-            remainingBudgetText.text = $"Remaining Budget: {remainingBudget:F2}";
+            remainingBudgetText.text = $"Remaining Income: {remainingBudget:F2}";
         }
     }
 
     // End the budgeting process
-    private void EndBudgeting()
+    public void EndBudgeting()
     {
-        Debug.Log("Budget has been fully allocated.");
+        Debug.Log("Income has been fully allocated.");
         entryInputField.interactable = false;
         SimulateExpenses();
     }
@@ -199,8 +194,8 @@ public class ZeroRuleManager : MonoBehaviour
     void ShowResults(float rentExpense, float foodExpense, float funExpense, float savings, float finalAmount)
     {
         // Assuming you have a UI Text or TMP_Text field to show the results
-        results.text = $"Income: {totalBudget} €\n" +
-                       $"Final amount of savings after paying all the expenses: {finalAmount} €\n";
+        results.text = $"Income: {totalBudget} ï¿½\n" +
+                       $"Final amount of savings after paying all the expenses: {finalAmount} ï¿½\n";
 
         Simualtionresults.SetActive(true);
     }

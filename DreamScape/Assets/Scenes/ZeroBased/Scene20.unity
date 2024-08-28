@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -521,11 +521,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 109755885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326143f140cbf594b927670faa7f5dc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 17d3994ccf5fe42fca0e27e6b1e87cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 1829615318}
-  budgetManager: {fileID: 0}
+  zeroRuleManager: {fileID: 944488781}
 --- !u!1 &125824401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,11 +1592,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 437139703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326143f140cbf594b927670faa7f5dc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 17d3994ccf5fe42fca0e27e6b1e87cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 1829615318}
-  budgetManager: {fileID: 0}
+  zeroRuleManager: {fileID: 944488781}
 --- !u!1 &461434487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,11 +1775,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 488670461}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326143f140cbf594b927670faa7f5dc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 17d3994ccf5fe42fca0e27e6b1e87cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 1829615318}
-  budgetManager: {fileID: 0}
+  zeroRuleManager: {fileID: 944488781}
 --- !u!1 &504462150
 GameObject:
   m_ObjectHideFlags: 0
@@ -2968,11 +2968,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 751497067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326143f140cbf594b927670faa7f5dc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 17d3994ccf5fe42fca0e27e6b1e87cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 1829615318}
-  budgetManager: {fileID: 0}
+  zeroRuleManager: {fileID: 944488781}
 --- !u!1 &822203950
 GameObject:
   m_ObjectHideFlags: 0
@@ -3191,11 +3191,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 832291216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326143f140cbf594b927670faa7f5dc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 17d3994ccf5fe42fca0e27e6b1e87cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 1829615318}
-  budgetManager: {fileID: 0}
+  zeroRuleManager: {fileID: 944488781}
 --- !u!1 &837628896
 GameObject:
   m_ObjectHideFlags: 0
@@ -3409,6 +3409,7 @@ MonoBehaviour:
   - {fileID: 1917842518}
   - {fileID: 488670461}
   remainingBudgetText: {fileID: 315438318}
+  remainingBudget: 0
   RentText: {fileID: 108519250}
   FoodText: {fileID: 2138796657}
   FunText: {fileID: 1739047936}
@@ -3501,11 +3502,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 964424263}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326143f140cbf594b927670faa7f5dc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 17d3994ccf5fe42fca0e27e6b1e87cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 1829615318}
-  budgetManager: {fileID: 0}
+  zeroRuleManager: {fileID: 944488781}
 --- !u!1 &1008967047
 GameObject:
   m_ObjectHideFlags: 0
@@ -4674,8 +4675,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -235, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -225.22119, y: 0}
+  m_SizeDelta: {x: 188.9229, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1209452362
 MonoBehaviour:
@@ -4697,7 +4698,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Budgeting:'
+  m_text: 'Withdraw:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5024,11 +5025,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1293074407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326143f140cbf594b927670faa7f5dc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 17d3994ccf5fe42fca0e27e6b1e87cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 1829615318}
-  budgetManager: {fileID: 0}
+  zeroRuleManager: {fileID: 944488781}
 --- !u!1 &1296563057
 GameObject:
   m_ObjectHideFlags: 0
@@ -5211,11 +5212,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1319253259}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326143f140cbf594b927670faa7f5dc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 17d3994ccf5fe42fca0e27e6b1e87cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 1829615318}
-  budgetManager: {fileID: 0}
+  zeroRuleManager: {fileID: 944488781}
 --- !u!1 &1341999164
 GameObject:
   m_ObjectHideFlags: 0
@@ -6574,11 +6575,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1777499117}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326143f140cbf594b927670faa7f5dc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 17d3994ccf5fe42fca0e27e6b1e87cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 1829615318}
-  budgetManager: {fileID: 0}
+  zeroRuleManager: {fileID: 944488781}
 --- !u!1 &1797462816
 GameObject:
   m_ObjectHideFlags: 0
@@ -7175,11 +7176,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1917842518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326143f140cbf594b927670faa7f5dc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 17d3994ccf5fe42fca0e27e6b1e87cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 1829615318}
-  budgetManager: {fileID: 0}
+  zeroRuleManager: {fileID: 944488781}
 --- !u!1 &1931449966
 GameObject:
   m_ObjectHideFlags: 0
