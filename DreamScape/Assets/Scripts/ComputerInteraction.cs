@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
 public class ComputerInteraction : MonoBehaviour
