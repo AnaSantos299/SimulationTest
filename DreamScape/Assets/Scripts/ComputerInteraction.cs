@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
 public class ComputerInteraction : MonoBehaviour
@@ -15,7 +16,7 @@ public class ComputerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // when interacting if the tag is player
+        if (other.CompareTag("Player")) // Ensure your player has the "Player" tag
         {
             InstructionText.text = "Click \"E\" to interact";
             Instructions.SetActive(true);
