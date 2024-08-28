@@ -1,0 +1,9 @@
+﻿title: Scene14_EN
+tags:
+---
+: A Box? It reminds me of the game i used to play when i was a child. #line:0cf1eef 
+: If i remeber well i have to move the box left and right and catch the objects falling from the sky. #line:0b8e000 
+: This one looks diferent, i need to catch only the objects that represent the essential for living. #line:006dae8 
+: If i remeber well, when i reach 20 points the game will stop. #line:0b8c6fd 
+<<startGame Spawner>>
+===

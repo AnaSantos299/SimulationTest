@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PuzzleButton
+  - DropSpotT
+  - DropSpot
+  - Receipt
+  - Shoes
+  - Wii
+  - Basket
   layers:
   - Default
   - TransparentFX

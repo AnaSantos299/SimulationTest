@@ -3,24 +3,56 @@ tags:
 ---
 : Where did I spend all my money? #line:line_7
 : Let me look around the room and see if I can find out something... #line:line_8
+<<enablePlayerMovement GameManager>>
 ===
 
 title: tableObject
 tags:
 ---
-: A new phone? 600€? I should really start considering my decisions... #line:line_9
+: This was expensive. I should really start considering my decisions... #line:line_9
+<<enablePlayerMovement GameManager>>
 ===
 
 title: bedObject
 tags:
 ---
-: I bought this shoes for 79€, were they really needed? #line:line10
+: I bought this for a high price, was it really needed? #line:line10
+<<enablePlayerMovement GameManager>>
 ===
 
 title: cabinetObject
 tags:
 ---
-: I haven't use this Playstation for such a long time, was it really a necessary purchase? #line:line11
+: I haven't use this for such a long time, was it really a necessary purchase? #line:line11
+<<enablePlayerMovement GameManager>>
+===
+
+title: guitarObject
+tags:
+---
+:I though i needed this when i bought it, but did i really? #line:0ca0f63 
+<<enablePlayerMovement GameManager>>
+===
+
+title: dragonObject
+tags:
+---
+: A purchase that maybe i could had avoided #line:0ca0f24
+<<enablePlayerMovement GameManager>>
+===
+
+title: randomObject
+tags:
+---
+: This was a gift, it doesnt count. #line:0f1af8c 
+<<enablePlayerMovement GameManager>>
+===
+
+title: objectAlreadyFound
+tags:
+---
+: I saw this before, i have to look for another thing that i bought. #line:0ecaae7 
+<<enablePlayerMovement GameManager>>
 ===
 
 title: transitionStart
@@ -28,8 +60,9 @@ tags:
 ---
 : ...another expense that maybe wasnt necessary... #line:0dd8045 
 : Ah, so many things, what am I doing with my life... #line:00f0b33 
-: I am really tired...i need to go to sleep, i will do something about this tomorrow. #line:0222bad 
-<<transition_Scene4Images GameManager>>
+: I might have to do everything again... #line:042b88a 
+: I should go to bed! #line:0d28328 
+<<enablePlayerMovement GameManager>>
 ===
 
 

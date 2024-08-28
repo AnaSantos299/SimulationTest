@@ -12,7 +12,9 @@ public class Scene5Events : MonoBehaviour
     //The UI element where the images will be displayed
     public Image displayImage;
     // Array to hold all images from going to the computer
-    public List<Sprite> images; 
+    public List<Sprite> images;
+    //SceneName
+    public string SceneName;
 
     //----------------------------------SHOW/HIDE IMAGES----------------------------------------
     [YarnCommand("transitionToScene6")]
@@ -35,7 +37,7 @@ public class Scene5Events : MonoBehaviour
         }
         //Chance scene after finishing showing all the images
         Debug.Log("Mudança de scene");
-        SceneManager.LoadScene("Scene6");
+        SceneManager.LoadScene(SceneName);
     }
 
 }

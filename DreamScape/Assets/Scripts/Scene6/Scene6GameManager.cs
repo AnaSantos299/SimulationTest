@@ -1,40 +1,73 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Scene6GameManager : MonoBehaviour
 {
-    //variable to know which page is being shown
-    private int browserPage;
-    //BackArrowButton
+    // Variable to track the current page/index
+    private int browserPage = 0;
+
+    // Back arrow button reference
     [SerializeField] private GameObject backArrow;
-    //The image component to change
+
+    // The image component to change
     public Image targetImage;
-    //the sprite to change to when click forward
-    public Sprite fowardSprite;
-    //the sprite to change to when click back
-    public Sprite backSprite;
+    public string SceneName;
+
+    // List of sprites to browse through
+    public List<Sprite> imageSprites;
 
 
+    void Start()
+    {
+        // Initialize the first image
+        UpdateImage();
+        // Back arrow should be inactive on the first image
+        backArrow.SetActive(false);
+    }
 
     public void FowardArrow()
     {
-        Debug.Log("ButtonClicked");
-        browserPage++;
-        backArrow.SetActive(true);
-        targetImage.sprite = fowardSprite;
+        Debug.Log("Forward Arrow Clicked");
 
-        if (browserPage >= 2)
+        // Check if we're at the last image
+        if (browserPage >= imageSprites.Count - 1)
         {
-            SceneManager.LoadScene("Scene8");
+            // If it's the last image, load the next scene
+            SceneManager.LoadScene(SceneName);
+        }
+        else
+        {
+            // Otherwise, move to the next image
+            browserPage++;
+            UpdateImage();
+            backArrow.SetActive(true); // Enable the back arrow as we're not on the first image
         }
     }
 
-  public void BackArrow()
+    public void BackArrow()
     {
-        Debug.Log("ButtonClicked");
-        targetImage.sprite = backSprite;
-        browserPage--;
-        backArrow.SetActive(false);
+        Debug.Log("Back Arrow Clicked");
+
+        // Move to the previous image if not the first one
+        if (browserPage > 0)
+        {
+            browserPage--;
+            UpdateImage();
+        }
+
+        // Back arrow should be inactive if we are at the first image
+        backArrow.SetActive(browserPage > 0);
+    }
+
+    private void UpdateImage()
+    {
+        // Update the image to the current sprite in the list
+        if (browserPage >= 0 && browserPage < imageSprites.Count)
+        {
+            targetImage.sprite = imageSprites[browserPage];
+        }
     }
 }
+

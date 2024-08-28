@@ -2,60 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Yarn.Unity;
 using UnityEngine.UI;
+using Yarn.Unity;
 
 public class Scene3Events : MonoBehaviour
 {
     // Dialogue
-    public DialogueRunner dialogueRunner; // dialogue runner
-    public GameObject[] objectsicons; // array of the icons of the objects, these icons appear on the right side of the screen
-    private int objectCount; // variable to keep track of how many icons are visible (this means how many objects the player has found in the room)
-    private bool[] hasBeenClicked; // array to keep track if an object has been clicked
+    public DialogueRunner dialogueRunner;
+    private int objectCount = 0; // Initialize object count
+    private bool[] hasBeenClicked = new bool[5];
 
-    public List<Sprite> images; // Array to hold all images from returningHome
-    public Image displayImage; // The UI element where the images will be displayed
-    public GameObject displayImageObj; // Temporary to turn the gameobject active
+    public List<Sprite> images;
+    public Image displayImage;
+    public GameObject displayImageObj;
 
-    void Start()
+    // Objects Bar
+    public Image ObjetcBar;
+    public List<Sprite> barSprites; // List to hold the sprites for the object bar
+    public Sprite defaultSprite; // Default sprite to show when no objects are collected
+
+    public CameraRotation cameraRotation;
+    public PlayerMovement playerMovement;
+
+    //variable to check if all the objects were collected
+    public bool allObjectsCollected;
+
+    //scene name
+    public string SceneName;
+
+
+    private void Start()
     {
-        // Initialize the hasBeenClicked array with the same length as objectsicons
-        hasBeenClicked = new bool[objectsicons.Length];
+        // Set the object bar sprite to the default sprite
+        ObjetcBar.sprite = defaultSprite;
+        cameraRotation.enabled = false;
+        playerMovement.enabled = false;
     }
 
-    //----------------------------------SHOW/HIDE IMAGES----------------------------------------
-    [YarnCommand("transition_Scene4Images")]
-    public void Transition_Scene4Images()
+    // Yarn Commands
+    [YarnCommand("enablePlayerMovement")]
+    public void EnablePlayerMovement()
     {
-        // Coroutine for the transaction from Scene3 to Scene4.
-        StartCoroutine(DisplayImagesForTransition());
+        dialogueRunner.Stop();
+        cameraRotation.enabled = true;
+        playerMovement.enabled = true;
     }
 
-    //----------------------------------ACTIONS FROM CLICKS----------------------------------------
+    public void DisablePlayerMovement()
+    {
+        cameraRotation.enabled = false;
+        playerMovement.enabled = false;
+    }
+
+    // Scene Objects
     public void TableObject()
     {
         if (!hasBeenClicked[0])
         {
-            // stop the dialogue running
-            dialogueRunner.Stop();
-            // Start new dialogue
-            dialogueRunner.StartDialogue("tableObject");
-            // show the first object of the array objectsicons
-            objectsicons[0].SetActive(true);
-            // add one to the object Count
-            objectCount++;
-            hasBeenClicked[0] = true; // mark this object as clicked
-            Debug.Log(objectCount);
-
-            // if the object count is >= 3, it will call the dialogue from the Scene3_EN.yarn and start the transition to the next scene.
-            if (objectCount >= 3)
-            {
-                Debug.Log("OBJECT COUNT IS 3");
-                // stop the dialogue running
-                dialogueRunner.Stop();
-                // Start new dialogue
-                dialogueRunner.StartDialogue("transitionStart");
-            }
+            FindObjectOfType<SoundManager>().Play("Correct");
+            DisablePlayerMovement();
+            CollectObject(0, "tableObject");
         }
     }
 
@@ -63,26 +69,9 @@ public class Scene3Events : MonoBehaviour
     {
         if (!hasBeenClicked[1])
         {
-            // stop the dialogue running
-            dialogueRunner.Stop();
-            // Start new dialogue
-            dialogueRunner.StartDialogue("cabinetObject");
-            // show the second object of the array objectsicons
-            objectsicons[1].SetActive(true);
-            // add one to the object count
-            objectCount++;
-            hasBeenClicked[1] = true; // mark this object as clicked
-            Debug.Log(objectCount);
-
-            // if the object count is >= 3, it will call the dialogue from the Scene3_EN.yarn and start the transition to the next scene.
-            if (objectCount >= 3)
-            {
-                Debug.Log("OBJECT COUNT IS 3");
-                // stop the dialogue running
-                dialogueRunner.Stop();
-                // Start new dialogue
-                dialogueRunner.StartDialogue("transitionStart");
-            }
+            FindObjectOfType<SoundManager>().Play("Correct");
+            DisablePlayerMovement();
+            CollectObject(1, "cabinetObject");
         }
     }
 
@@ -90,45 +79,102 @@ public class Scene3Events : MonoBehaviour
     {
         if (!hasBeenClicked[2])
         {
-            // stop the dialogue running
-            dialogueRunner.Stop();
-            // Start new dialogue
-            dialogueRunner.StartDialogue("bedObject");
-            // show the third object of the array objectsicons
-            objectsicons[2].SetActive(true);
-            // add one to the object count
-            objectCount++;
-            hasBeenClicked[2] = true; // mark this object as clicked
-            Debug.Log(objectCount);
-
-            // if the object count is >= 3, it will call the dialogue from the Scene3_EN.yarn and start the transition to the next scene.
-            if (objectCount >= 3)
-            {
-                Debug.Log("OBJECT COUNT IS 3");
-                // stop the dialogue running
-                dialogueRunner.Stop();
-                // Start new dialogue
-                dialogueRunner.StartDialogue("transitionStart");
-            }
+            FindObjectOfType<SoundManager>().Play("Correct");
+            DisablePlayerMovement();
+            CollectObject(2, "bedObject");
         }
     }
 
-    //----------------------------------COROUTINES----------------------------------------
-
-    private IEnumerator DisplayImagesForTransition()
+    public void GuitarObject()
     {
-        // Turn the gameobject displayimage active true
-        displayImageObj.SetActive(true);
-        Debug.Log("Entrou na Coroutine");
-        foreach (Sprite image in images) // For each image, display one at a time with the interval of 3 seconds
+        if (!hasBeenClicked[3])
         {
-            Debug.Log("Sprite" + image);
-            displayImage.sprite = image; // Set the current image
-            yield return new WaitForSeconds(3f); // Wait for 3s
+            FindObjectOfType<SoundManager>().Play("Correct");
+            DisablePlayerMovement();
+            CollectObject(3, "guitarObject");
         }
-        // Change scene after finishing showing all the images
-        Debug.Log("Mudança de scene");
-        SceneManager.LoadScene("Scene4");
     }
-}
+    public void DragonObject()
+    {
+        if (!hasBeenClicked[4])
+        {
+            FindObjectOfType<SoundManager>().Play("Correct");
+            DisablePlayerMovement();
+            CollectObject(4, "dragonObject");
+        }
+    }
+    public void RandomObject()
+    {
+        DisablePlayerMovement();
+        dialogueRunner.Stop();
+        dialogueRunner.StartDialogue("randomObject");
+        Debug.Log("RandomObject Found");
+    }
 
+    public void ObjectAlreadyFound()
+    {
+        DisablePlayerMovement();
+        dialogueRunner.Stop();
+        dialogueRunner.StartDialogue("objectAlreadyFound");
+        Debug.Log("Object found for the second time");
+    }
+
+    // Actions to be made after finding an object
+    private void CollectObject(int index, string dialogueName)
+    {
+        // Mark the object as clicked
+        hasBeenClicked[index] = true;
+
+        // Stop the current dialogue and start a new one
+        dialogueRunner.Stop();
+        dialogueRunner.StartDialogue(dialogueName);
+
+        // Increase the object count
+        objectCount++;
+        Debug.Log(objectCount);
+
+        // Change the object bar sprite
+        UpdateObjectBarSprite();
+
+        // If the object count reaches 5, trigger the transition dialogue
+        if (objectCount >= 5)
+        {
+            Debug.Log("OBJECT COUNT IS 5");
+            allObjectsCollected = true;
+            dialogueRunner.Stop();
+            dialogueRunner.StartDialogue("transitionStart");
+
+        }
+    }
+    // Update barSprite
+    private void UpdateObjectBarSprite()
+    {
+        if (objectCount > 0 && objectCount <= barSprites.Count)
+        {
+            ObjetcBar.sprite = barSprites[objectCount - 1];
+        }
+        else
+        {
+            // If no objects collected, show the default sprite
+            ObjetcBar.sprite = defaultSprite;
+        }
+    }
+
+    // Coroutine to display images of the transition
+    public IEnumerator DisplayImagesForTransition()
+    {
+        displayImageObj.SetActive(true);
+        Debug.Log("Starting Coroutine");
+
+        foreach (Sprite image in images)
+        {
+            Debug.Log("Sprite: " + image);
+            displayImage.sprite = image;
+            yield return new WaitForSeconds(3f);
+        }
+
+        Debug.Log("Changing scene");
+        SceneManager.LoadScene(SceneName);
+    }
+
+}
