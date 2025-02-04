@@ -9,7 +9,7 @@ public class InputHandle : MonoBehaviour
     // Name of the method to call on click
     public string methodName;
 
-#if UNITY_WEBGL
+#if UNITY_WEBGL || UNITY_STANDALONE
     // This method is called when the user releases the mouse button over the Collider
     void OnMouseClick()
     {

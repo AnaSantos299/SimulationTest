@@ -49,7 +49,7 @@ EditorBuildSettings:
     guid: 7589d3090cc8657489f4c44a6b4576e6
   - enabled: 1
     path: Assets/Scenes/ZeroBased/Scene15.unity
-    guid: 15b80b28c03c5ef41ab548c095e7530e
+    guid: 0506e19c169a1ed4488ad95604c40a80
   - enabled: 1
     path: Assets/Scenes/ZeroBased/Scene16.unity
     guid: b9b4000493c94c442807c9a54f7ea256
@@ -65,4 +65,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ZeroBased/Scene20.unity
     guid: 76a70702262cd6c4280bc51874b38b3e
+  - enabled: 1
+    path: Assets/Scenes/ZeroBased/Scene21.unity
+    guid: 81727634a22aa8a4286efe41f8a615d6
   m_configObjects: {}
