@@ -3,60 +3,69 @@ using UnityEngine;
 public class CameraRotation : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
-    public Transform playerBody; // Reference to the player's transform (assign in Unity Editor)
-    public float dragThreshold = 2f; // Threshold to start dragging
+    public Transform playerBody;
+    public float dragThreshold = 2f;
 
-    private float rotationX = 0f; // Current rotation around the X-axis
+    private float rotationX = 0f;
     private bool isDragging = false;
     private Vector3 initialMousePosition;
 
     void Update()
     {
-        // Check if the right mouse button is pressed
+        // Start dragging
         if (Input.GetMouseButtonDown(1))
         {
             initialMousePosition = Input.mousePosition;
+            isDragging = false; // reset drag state
         }
 
-        // Check if the right mouse button is released
-        if (Input.GetMouseButtonUp(1))
-        {
-            isDragging = false;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-
-        // Check if the right mouse button is held down
+        // Holding right mouse button
         if (Input.GetMouseButton(1))
         {
-            // Calculate the distance moved from the initial position
             float distance = (Input.mousePosition - initialMousePosition).magnitude;
 
-            // Start dragging if the distance is greater than the threshold
-            if (distance > dragThreshold)
+            if (!isDragging && distance > dragThreshold)
             {
                 isDragging = true;
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                LockCursor();
+            }
+
+            if (isDragging)
+            {
+                float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+                float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+                playerBody.Rotate(Vector3.up * mouseX);
+                rotationX -= mouseY;
+                rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+                transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
             }
         }
 
-        // Only rotate the camera if the user is dragging
-        if (isDragging)
+        // Stop dragging
+        if (Input.GetMouseButtonUp(1))
         {
-            // Input for mouse movement
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-            // Rotate the player horizontally (Y-axis)
-            playerBody.Rotate(Vector3.up * mouseX);
-
-            // Calculate vertical rotation
-            rotationX -= mouseY;
-            rotationX = Mathf.Clamp(rotationX, -90f, 90f); // Clamp to prevent camera flipping
-
-            // Rotate the camera vertically (X-axis)
-            transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+            isDragging = false;
+            UnlockCursor(); // always unlock and show cursor
         }
+
+        //If mouse button is NOT pressed but cursor is still locked, unlock it
+        if (!Input.GetMouseButton(1) && Cursor.lockState != CursorLockMode.None)
+        {
+            isDragging = false;
+            UnlockCursor();
+        }
+    }
+
+    void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
