@@ -5643,7 +5643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cff9bc273389452dbd28cb6a0980617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 400
+  mouseSensitivity: 300
   playerBody: {fileID: 1842627739}
   dragThreshold: 2
 --- !u!1001 &991545105

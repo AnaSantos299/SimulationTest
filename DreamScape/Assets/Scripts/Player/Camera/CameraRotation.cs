@@ -2,70 +2,61 @@ using UnityEngine;
 
 public class CameraRotation : MonoBehaviour
 {
-    public float mouseSensitivity = 100f;
-    public Transform playerBody;
-    public float dragThreshold = 2f;
+    public float mouseSensitivity = 75f;
+    public Transform playerBody; // Reference to the player's transform (assign in Unity Editor)
+    public float dragThreshold = 2f; // Threshold to start dragging
 
-    private float rotationX = 0f;
+    private float rotationX = 0f; // Current rotation around the X-axis
     private bool isDragging = false;
     private Vector3 initialMousePosition;
 
     void Update()
     {
-        // Start dragging
+        // Check if the right mouse button is pressed
         if (Input.GetMouseButtonDown(1))
         {
             initialMousePosition = Input.mousePosition;
-            isDragging = false; // reset drag state
         }
 
-        // Holding right mouse button
-        if (Input.GetMouseButton(1))
-        {
-            float distance = (Input.mousePosition - initialMousePosition).magnitude;
-
-            if (!isDragging && distance > dragThreshold)
-            {
-                isDragging = true;
-                LockCursor();
-            }
-
-            if (isDragging)
-            {
-                float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-                float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-                playerBody.Rotate(Vector3.up * mouseX);
-                rotationX -= mouseY;
-                rotationX = Mathf.Clamp(rotationX, -90f, 90f);
-                transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
-            }
-        }
-
-        // Stop dragging
+        // Check if the right mouse button is released
         if (Input.GetMouseButtonUp(1))
         {
             isDragging = false;
-            UnlockCursor(); // always unlock and show cursor
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
-        //If mouse button is NOT pressed but cursor is still locked, unlock it
-        if (!Input.GetMouseButton(1) && Cursor.lockState != CursorLockMode.None)
+        // Check if the right mouse button is held down
+        if (Input.GetMouseButton(1))
         {
-            isDragging = false;
-            UnlockCursor();
+            // Calculate the distance moved from the initial position
+            float distance = (Input.mousePosition - initialMousePosition).magnitude;
+
+            // Start dragging if the distance is greater than the threshold
+            if (distance > dragThreshold)
+            {
+                isDragging = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
-    }
 
-    void LockCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
+        // Only rotate the camera if the user is dragging
+        if (isDragging)
+        {
+            // Input for mouse movement
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-    void UnlockCursor()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+            // Rotate the player horizontally (Y-axis)
+            playerBody.Rotate(Vector3.up * mouseX);
+
+            // Calculate vertical rotation
+            rotationX -= mouseY;
+            rotationX = Mathf.Clamp(rotationX, -90f, 90f); // Clamp to prevent camera flipping
+
+            // Rotate the camera vertically (X-axis)
+            transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+        }
     }
 }
