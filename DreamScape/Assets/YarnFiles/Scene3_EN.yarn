@@ -3,6 +3,9 @@ tags:
 ---
 : Where did I spend all my money? #line:line_7
 : Let me look around the room and see if I can find out something... #line:line_8
+: To move around use "W" "A" "S" "D". #line:055ab13 
+: To look around the room, hold down the right mouse button. #line:06dab27 
+: To interact with the objects in the room click using the left mouse button. #line:06781ad 
 <<enablePlayerMovement GameManager>>
 ===
 
